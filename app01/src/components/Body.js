@@ -1,4 +1,5 @@
 import React from 'react'
+import Button from './reusable/Button'
 
 const Body = ({ data, BlockTriggerById }) =>
   data.map(({ id, name, isBlocked }) => {
