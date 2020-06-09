@@ -10,7 +10,9 @@ const Table = ({ data, headers, BlockTriggerById }) => {
           {/* <Headers headers={headers} /> */}
   
           <tbody>
-          <Body data={data} BlockTriggerById={BlockTriggerById} />
+          <Body 
+          data={data} 
+          BlockTriggerById={BlockTriggerById} />
           </tbody>
         </table>
       </React.Fragment>
