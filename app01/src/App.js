@@ -4,6 +4,19 @@ import './App.css';
 
 const App = () => {
 
+  // could be an api call 
+  const BlockTriggerById = id => {
+
+    var blockedAccount = data.filter(item => item.id === id)[0]
+    blockedAccount = { ...blockedAccount, isBlocked: !blockedAccount.isBlocked }
+
+    const filteredList = data.filter(item => item.id !== id)
+
+    const finalList = [...filteredList, blockedAccount]
+
+    dataSet(finalList)
+  }
+
   const [data, dataSet] = useState(
     [
       { id: 1, name: `Hassan`, isBlocked: false },
@@ -13,12 +26,11 @@ const App = () => {
     ])
 
   return (<React.Fragment>
-
-
-
-
-
-    <Table data={data} headers={[`id`, `name`, `isBlocked`]} />
+    <Table
+      data={data}
+      headers={[`name`, `isBlocked`]}
+      BlockTriggerById={BlockTriggerById}
+    />
   </React.Fragment>)
 }
 
@@ -27,32 +39,33 @@ const Button = ({ onClick, name, className }) =>
     className={className}
     onClick={onClick}>{name}</button>
 
-const Table = ({ data, headers }) => {
+const Table = ({ data, headers, BlockTriggerById }) => {
 
   return (
     <React.Fragment>
-      This is Table.
 
-      <Headers headers={headers} />
+      {/* <table className={`table`}> */}
+        <Headers headers={headers} />
 
-      <Body data={data} />
+        <Body data={data} BlockTriggerById={BlockTriggerById} />
+      {/* </table> */}
     </React.Fragment>
   )
 }
 
-const Body = ({ data }) =>
+const Body = ({ data, BlockTriggerById }) =>
   data.map(({ id, name, isBlocked }) => {
 
     // const idd = `id is ${id}`
 
     const BlockElement = !isBlocked ?
       <Button
-        onClick={() => alert(`block`)}
+        onClick={() => BlockTriggerById(id)}
         name={`Block`}
         className={"btn btn-danger"}
       /> :
       <Button
-        onClick={() => alert(`unblock`)}
+        onClick={() => BlockTriggerById(id)}
         name={`Unblock`}
         className={"btn btn-secondary"}
       />
@@ -63,7 +76,7 @@ const Body = ({ data }) =>
       <tr key={id}>
         {/* <td>{idd}</td> */}
         <td>{name}</td>
-        <td>{isBlocked ? `yes` : `no`}</td>
+        {/*  <td>{isBlocked ? `yes` : `no`}</td> */}
         <td>{BlockElement}</td>
       </tr>
     )
