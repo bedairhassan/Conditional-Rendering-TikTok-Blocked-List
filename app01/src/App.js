@@ -15,6 +15,7 @@ const App = () => {
     const finalList = [...filteredList, blockedAccount]
 
     dataSet(finalList)
+    console.table(data)
   }
 
   const [data, dataSet] = useState(
@@ -26,11 +27,13 @@ const App = () => {
     ])
 
   return (<React.Fragment>
-    <Table
-      data={data}
-      headers={[`name`, `isBlocked`]}
-      BlockTriggerById={BlockTriggerById}
-    />
+    <center>
+      <Table
+        data={data}
+        headers={[`name`, `isBlocked`]}
+        BlockTriggerById={BlockTriggerById}
+      />
+    </center>
   </React.Fragment>)
 }
 
@@ -44,11 +47,11 @@ const Table = ({ data, headers, BlockTriggerById }) => {
   return (
     <React.Fragment>
 
-      {/* <table className={`table`}> */}
-        <Headers headers={headers} />
+      <table className={`table`}>
+        {/* <Headers headers={headers} /> */}
 
         <Body data={data} BlockTriggerById={BlockTriggerById} />
-      {/* </table> */}
+      </table>
     </React.Fragment>
   )
 }
