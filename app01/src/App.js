@@ -22,6 +22,7 @@ const Table = ({ data, headers }) => {
   return (
     <React.Fragment>
       This is Table.
+      <button type="button" class="btn btn-primary">Primary</button>
 
       <Headers headers={headers}/>
 
